@@ -1,0 +1,16 @@
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: annotations 
+  labels:
+    project: roboshop
+  annotations:
+    jenkins_url: "https://hub.docker.com/"
+    image_registry: "https://jenkins.com"
+spec:
+  containers:
+  - name: nginx 
+    image: nginx 
+
+# Labels are used for internal reference for pods 
+# Annotations are used for external reference for pods 

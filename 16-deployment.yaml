@@ -1,0 +1,41 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata:
+  name: nginx-deployment 
+  labels:
+    project: roboshop 
+    environment: dev 
+    purpose: poc 
+spec:
+  replicas: 2 
+  selector:
+    matchLabels:
+      tier: frontend 
+  template:
+    metadata:
+      labels:
+        tier: frontend 
+    spec:
+      containers:
+      - name: nginx 
+        image: nginx 
+        containerPort: 80 
+      
+---
+
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: nginx-service 
+  labels:
+    project: roboshop 
+    environment: dev 
+    purpose: poc 
+spec:
+  selector:
+    tier: frontend 
+  ports:
+  - protocol: "TCP"
+    port: 80 
+    targetPort: 80 
+  

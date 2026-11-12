@@ -1,0 +1,38 @@
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: nginx-pod 
+spec:
+  containers:
+  - name: nginx 
+    image: nginx 
+    envFrom:
+    - configMapRef:
+        name: nginx-configmap 
+
+---
+
+apiVersion: v1
+kind: ConfigMap 
+metadata:
+  name: configmap 
+data:
+  APP_COLOR: Pink 
+
+---
+
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: example-pod 
+spec:
+  containers:
+  - name: nginx 
+    image: nginx 
+    env:
+    - name: APP_COLOR
+      valueFrom: 
+        configMapKeyRef:
+          name: confimap 
+          key: APP_COLOR
+ 
